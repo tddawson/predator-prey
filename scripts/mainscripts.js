@@ -4,6 +4,9 @@ var c;
 var _prevPrey;
 var _prevPredator;
 
+var _startPrey = 500;
+var _startPredator = 20;
+
 // Max values for all the different rates
 var _preyGMax = 2;
 var _preyDMax = .4;
@@ -15,7 +18,7 @@ $( function() {
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
 	$('#simulate-button').on("click", function() {
-		simulate(2000);
+		simulate(10000);
 	});
 
 	$("#compare-to-td").hide();
@@ -73,8 +76,8 @@ function simulate(numGenerations) {
 	var predatorArray = [];
 	var preyArray = [];
 	var max = 0;
-	var prey = 5;
-	var predator = 2;
+	var prey = _startPrey;
+	var predator = _startPredator;
 	
     // Get parameters
     var preyDeathRate = $('#prey-death-rate').text();
@@ -104,7 +107,6 @@ function simulate(numGenerations) {
 	_prevPrey = preyArray;
 	_prevPredator = predatorArray;
 	$("#save-graph").show();
-	console.log($("#save-graph"));
 	$("#compare-to-td").show();
 }
 
@@ -209,8 +211,8 @@ function drawGraph(preyArray, predatorArray, max, stepSize) {
 }
 
 function drawLabels(max) {
-
-	var numLines = max / 5;
+	_yStep = 25;
+	var numLines = max / _yStep;
 	var gap = canvas.height / (numLines * 1.0);
 	
 	// Draw lines
@@ -219,7 +221,7 @@ function drawLabels(max) {
 	c.lineWidth = .5;
 	c.beginPath();
 	for (var i = 0; i < numLines; i++) {
-		c.fillText(max - (i * 5) + "", 5, i * gap + 10); 
+		c.fillText(max - (i * _yStep) + "", 5, i * gap + 10); 
 		c.moveTo(0, i * gap);
 		c.lineTo(canvas.width, i * gap);
 	}
