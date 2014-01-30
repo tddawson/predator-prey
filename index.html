@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Predator / Prey Simulation</title>
+	<link rel="stylesheet" type="text/css" href="css/styles.css"> 
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css"> 
+	<script src="scripts/jquery.js"></script>
+	<script src="scripts/jquery-ui.js"></script>
+	<script type="text/javascript" src="scripts/mainscripts.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+		<h1>Predator / Prey Simulation</h1>
+		<div id="options">
+			<table id="model-parameters">
+				<tr><td id="prey-heading" colspan="3">Prey</td></tr>
+				<tr>
+					<td>Growth rate:</td>
+					<td><div id="prey-growth-slider" class="slider"></div></td>
+					<td id="prey-growth-rate"></td>
+				</tr>
+				<tr>
+					<td>Death rate:</td>
+					<td><div id="prey-death-slider" class="slider"></div></td>
+					<td id="prey-death-rate"></td>
+				</tr>
+				<tr><td id="predator-heading" colspan="3">Predator</td></tr>
+				<tr>
+					<td>Growth rate:</td>
+					<td><div id="predator-growth-slider" class="slider"></div></td>
+					<td id="predator-growth-rate"></td>
+				</tr>
+				<tr>
+					<td>Death rate:</td>
+					<td><div id="predator-death-slider" class="slider"></div></td>
+					<td id="predator-death-rate"></td>
+				</tr>
+				<tr>
+					<td colspan="3" id="compare-to-td"><input type="checkbox" id="compare-to-checkbox" value="compare" />Compare to previous?</td>
+				</tr>
+				<tr>
+					<td colspan="3"><input type="button" id="simulate-button" value="Simulate" /></td>
+				</tr>
+			</table>
+			<a href="predator-prey-simulation.zip">Download for offline use</a>
+		</div>
+		<div id="graph">
+			<canvas id="canvas" width="560" height="450">
+				<p>Bummer! You're browser isn't compatible with this fantastic predator/prey model tool thing.  Please download a modern browser like Chrome or Firefox.</p>
+			</canvas>
+			<div id="save-graph">
+				<a href="#" onclick="saveGraph()">Save Graph</a>
+				<p><em>Click the link above to open a window with the image.  Then, right-click and click "Save image as..." to save to your computer.</em></p>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
