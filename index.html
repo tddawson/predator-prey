@@ -10,34 +10,50 @@
 </head>
 <body>
     <div id="wrapper">
-		<h1>Predator / Prey Simulation</h1>
 		<div id="options">
 			<table id="model-parameters">
-				<tr><td id="prey-heading" colspan="3">Prey</td></tr>
-				<!--<tr>
+				<tr><td id="prey-heading" class="heading" colspan="3">Prey</td></tr>
+				<tr>
 					<td colspan="2">Initial Population:</td>
-					<td><input type="text" width="20"/></td>
-				</tr>-->
+					<td><input type="text" id="prey-initial-population" class="param" value="500"/></td>
+				</tr>
 				<tr>
 					<td>Growth rate:</td>
 					<td><div id="prey-growth-slider" class="slider"></div></td>
-					<td id="prey-growth-rate"></td>
+					<td><input type="text" id="prey-growth-rate" class="param"/></td>
 				</tr>
 				<tr>
 					<td>Death rate:</td>
 					<td><div id="prey-death-slider" class="slider"></div></td>
-					<td id="prey-death-rate"></td>
+					<td><input type="text" id="prey-death-rate" class="param"/></td>
 				</tr>
-				<tr><td id="predator-heading" colspan="3">Predator</td></tr>
+				
+
+				<tr><td id="predator-heading" class="heading" colspan="3">Predator</td></tr>
+				<tr>
+					<td colspan="2">Initial Population:</td>
+					<td><input type="text" id="predator-initial-population" class="param" value="20"/></td>
+				</tr>
 				<tr>
 					<td>Growth rate:</td>
 					<td><div id="predator-growth-slider" class="slider"></div></td>
-					<td id="predator-growth-rate"></td>
+					<td><input type="text" id="predator-growth-rate" class="param"/></td>
 				</tr>
 				<tr>
 					<td>Death rate:</td>
 					<td><div id="predator-death-slider" class="slider"></div></td>
-					<td id="predator-death-rate"></td>
+					<td><input type="text" id="predator-death-rate" class="param"/></td>
+				</tr>
+
+
+				<tr><td id="advanced-heading" class="heading" colspan="3">Advanced Options</td></tr>
+				<tr>
+					<td colspan="2">Generations:</td>
+					<td><input type="text" id="generations" class="param" value="1000"/></td>
+				</tr>
+				<tr>
+					<td colspan="2">Time Step:</td>
+					<td><input type="text" id="time-step" class="param" value=".001"/></td>
 				</tr>
 				<tr>
 					<td colspan="3" id="compare-to-td"><input type="checkbox" id="compare-to-checkbox" value="compare" />Compare to previous?</td>
@@ -45,8 +61,8 @@
 				<tr>
 					<td colspan="3"><input type="button" id="simulate-button" value="Simulate" /></td>
 				</tr>
+
 			</table>
-			<a href="predator-prey-simulation.zip">Download for offline use</a>
 		</div>
 		<div id="graph">
 			<canvas id="canvas" width="560" height="450">

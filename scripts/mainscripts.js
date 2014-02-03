@@ -1,11 +1,10 @@
-var timeStep = .01;
+// Canvas and context variables
 var canvas;
 var c;
+
+// To store most recent predator and prey arrays
 var _prevPrey;
 var _prevPredator;
-
-var _startPrey = 500;
-var _startPredator = 20;
 
 // Max values for all the different rates
 var _preyGMax = 2;
@@ -17,12 +16,19 @@ var _predatorDMax = 1;
 $( function() {
 	canvas = document.getElementById('canvas');
 	c = canvas.getContext('2d');
+
+	// Run simulation when the button is pressed
 	$('#simulate-button').on("click", function() {
-		simulate(10000);
+
+		simulate(parseInt($("#generations").val()));
+
 	});
 
+	// Hide options that shouldn't be available until simulation is run.
 	$("#compare-to-td").hide();
 	$("#save-graph").hide();
+
+	// Initialize the jQuery UI sliders
 	initSliders();
 });
 
@@ -32,21 +38,21 @@ function initSliders() {
 		value:50,
 		slide: function( event, ui ) {
 			var pgr = (ui.value / 100) * _preyGMax;
-			$("#prey-growth-rate").text(pgr.toFixed(2));
+			$("#prey-growth-rate").val(pgr.toFixed(3));
 		}
 	});
 	var pgr = .5 * _preyGMax;
-	$("#prey-growth-rate").text(pgr.toFixed(2));
+	$("#prey-growth-rate").val(pgr.toFixed(3));
 	
 	$( "#prey-death-slider" ).slider({
 		value:50,
 		slide: function( event, ui ) {
 			var pdr = (ui.value / 100) * _preyDMax;
-			$("#prey-death-rate").text(pdr.toFixed(2));
+			$("#prey-death-rate").val(pdr.toFixed(3));
 		}
 	});
 	var pdr = .5 * _preyDMax;
-	$("#prey-death-rate").text(pdr.toFixed(2));
+	$("#prey-death-rate").val(pdr.toFixed(3));
 
 	
 	// Predator sliders
@@ -54,49 +60,53 @@ function initSliders() {
 		value:50,
 		slide: function( event, ui ) {
 			var pgr = (ui.value / 100) * _predatorGMax;
-			$("#predator-growth-rate").text(pgr.toFixed(2));
+			$("#predator-growth-rate").val(pgr.toFixed(3));
 		}
 	});
 	var pgr = .5 * _predatorGMax;
-	$("#predator-growth-rate").text(pgr.toFixed(2));
+	$("#predator-growth-rate").val(pgr.toFixed(3));
 
 	$( "#predator-death-slider" ).slider({
 		value:50,
 		slide: function( event, ui ) {
 			var pdr = (ui.value / 100) * _predatorDMax;
-			$("#predator-death-rate").text(pdr.toFixed(2));
+			$("#predator-death-rate").val(pdr.toFixed(3));
 		}
 	});
 	var pdr = .5 * _predatorDMax;
-	$("#predator-death-rate").text(pdr.toFixed(2));
+	$("#predator-death-rate").val(pdr.toFixed(3));
 }
 
 function simulate(numGenerations) {
+	console.log("Simulating " + numGenerations + " generations.")
+
 	// Reset
 	var predatorArray = [];
 	var preyArray = [];
 	var max = 0;
-	var prey = _startPrey;
-	var predator = _startPredator;
 	
     // Get parameters
-    var preyDeathRate = $('#prey-death-rate').text();
-    var predatorDeathRate = $('#predator-death-rate').text();
-    var preyGrowthRate = $('#prey-growth-rate').text();
-    var predatorGrowthRate = $('#predator-growth-rate').text();
+	var timeStep = ($("#time-step").val());
+	var prey = parseInt($("#prey-initial-population").val());
+	var predator = parseInt($("#predator-initial-population").val());
+    var preyDeathRate = $('#prey-death-rate').val();
+    var predatorDeathRate = $('#predator-death-rate').val();
+    var preyGrowthRate = $('#prey-growth-rate').val();
+    var predatorGrowthRate = $('#predator-growth-rate').val();
 	
-
-    var pop = $('#populations');
     for (var i = 0; i < numGenerations; i++) {
 		preyArray.push(prey);
 		predatorArray.push(predator);
 		
         // Calculate values of predators and prey for next generation
-        var newPrey = calculatePrey(prey, preyGrowthRate, preyDeathRate, predator);
-        var newPredator = calculatePredator(prey, predator, predatorGrowthRate, predatorDeathRate);
+        var newPrey = calculatePrey(prey, preyGrowthRate, preyDeathRate, predator, timeStep);
+        var newPredator = calculatePredator(prey, predator, predatorGrowthRate, predatorDeathRate, timeStep);
 
+        // Update the max value if necessary.
 		max = (newPrey > max) ? newPrey : max;
 		max = (newPredator > max) ? newPredator : max;
+
+		// Don't let predator or prey get below 0.
         prey = (newPrey > 0) ? newPrey : 0;
         predator = (newPredator > 0) ? newPredator : 0;
     }
@@ -110,12 +120,12 @@ function simulate(numGenerations) {
 	$("#compare-to-td").show();
 }
 
-function calculatePrey(prey, preyGrowthRate, preyDeathRate, predator) {
+function calculatePrey(prey, preyGrowthRate, preyDeathRate, predator, timeStep) {
     var change = preyGrowthRate * prey - preyDeathRate * prey * predator;
     return prey + change * timeStep;
 }
 
-function calculatePredator(prey, predator, predatorGrowthRate, predatorDeathRate) {
+function calculatePredator(prey, predator, predatorGrowthRate, predatorDeathRate, timeStep) {
     var change = predatorGrowthRate * prey * predator - predatorDeathRate * predator;
     return predator + change * timeStep;
 }
@@ -129,6 +139,10 @@ function boundingMultipleOf(num, multiple) {
 }
 
 function drawGraph(preyArray, predatorArray, max, stepSize) {
+	console.log("Drawing the graph.");
+	console.log("PREY: " + preyArray);
+	console.log("PREDATOR: " + predatorArray);
+	
 	// Erase
 	c.clearRect(0, 0, canvas.width, canvas.height);
 

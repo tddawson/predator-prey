@@ -4,7 +4,6 @@
 body, #canvas { background:#fdfdfd; }
 
 body {
-	margin-top:40px;
 	font-family:"Verdana", "Arial", sans-serif;
 }
 
@@ -14,7 +13,7 @@ body {
 }
 
 #canvas {
-	margin-top:40px;
+	margin-top:60px;
 	float:left;
 }
 
@@ -40,22 +39,23 @@ table {
 table#model-parameters td {
 	font-size:12px;
 	border-bottom: dotted 1px #ccc;
-	padding:20px 10px;
+	padding:10px 10px;
 	font-weight:900;
 }
 
-table#model-parameters td#prey-heading {
+table#model-parameters td.heading {
 	border-bottom: solid 1px #aaa;
 	padding:40px 10px 10px 10px; 
-	color:#f00;
-	font-size:16px;
+	font-size:16px;	
 }
 
+table#model-parameters td#prey-heading {
+	color:#f00;
+}
+
+
 table#model-parameters td#predator-heading {
-	border-bottom: solid 1px #aaa;
-	padding:40px 10px 10px 10px;
 	color:#369;
-	font-size:16px;
 }
 
 table#model-parameters td#compare-to-td {
@@ -66,12 +66,11 @@ table#model-parameters td#compare-to-td {
 
 table#model-parameters td#compare-to-td input {
 	margin-right:10px;
-	border:none;
 	float:left;
 }
 
 table#model-parameters td:nth-child(3) {
-	width:30px;
+	width:50px;
 	font-weight:normal;
 }
 
@@ -84,6 +83,10 @@ input#simulate-button {
 	padding: 10px 20px;
 	margin-top:0px;
 	font-weight: 900;
+}
+
+input.param {
+	width:50px;
 }
 
 a {
