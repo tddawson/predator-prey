@@ -1,4 +1,3 @@
-/* GENERAL SITE LAYOUT */
 * { margin: 0px; padding: 0px;}
 
 body, #canvas { background:#fdfdfd; }
@@ -12,7 +11,7 @@ body {
 	width:920px;
 }
 
-#canvas {
+#canvas-div {
 	margin-top:60px;
 	float:left;
 }
@@ -24,11 +23,6 @@ div.slider {
 
 div#options {
 	width:360px;
-	float:left;
-}
-
-div#graph {
-	width:560px;
 	float:left;
 }
 

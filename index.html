@@ -4,9 +4,14 @@
 	<title>Predator / Prey Simulation</title>
 	<link rel="stylesheet" type="text/css" href="css/styles.css"> 
 	<link rel="stylesheet" type="text/css" href="css/jquery-ui.css"> 
-	<script src="scripts/jquery.js"></script>
-	<script src="scripts/jquery-ui.js"></script>
-	<script type="text/javascript" src="scripts/mainscripts.js"></script>
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+	<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+	<script type="text/javascript" src="scripts/AnimalModel.js"></script>
+	<script type="text/javascript" src="scripts/Graph.js"></script>
+	<script type="text/javascript" src="scripts/DataSet.js"></script>
+	<script type="text/javascript" src="scripts/LotkaVolterra.js"></script>
+	<script type="text/javascript" src="scripts/Point.js"></script>
+	<script type="text/javascript" src="scripts/Main.js"></script>
 </head>
 <body>
     <div id="wrapper">
@@ -27,7 +32,6 @@
 					<td><div id="prey-death-slider" class="slider"></div></td>
 					<td><input type="text" id="prey-death-rate" class="param"/></td>
 				</tr>
-				
 
 				<tr><td id="predator-heading" class="heading" colspan="3">Predator</td></tr>
 				<tr>
@@ -45,15 +49,14 @@
 					<td><input type="text" id="predator-death-rate" class="param"/></td>
 				</tr>
 
-
-				<tr><td id="advanced-heading" class="heading" colspan="3">Advanced Options</td></tr>
+				<tr><td id="advanced-heading" class="heading" colspan="3">Simulation Options</td></tr>
 				<tr>
 					<td colspan="2">Generations:</td>
 					<td><input type="text" id="generations" class="param" value="1000"/></td>
 				</tr>
 				<tr>
 					<td colspan="2">Time Step:</td>
-					<td><input type="text" id="time-step" class="param" value=".001"/></td>
+					<td><input type="text" id="time-step" class="param" value=".01"/></td>
 				</tr>
 				<tr>
 					<td colspan="3" id="compare-to-td"><input type="checkbox" id="compare-to-checkbox" value="compare" />Compare to previous?</td>
@@ -65,9 +68,9 @@
 			</table>
 		</div>
 		<div id="graph">
-			<canvas id="canvas" width="560" height="450">
-				<p>Bummer! You're browser isn't compatible with this fantastic predator/prey model tool thing.  Please download a modern browser like Chrome or Firefox.</p>
-			</canvas>
+			<div id="canvas-div" width="560" height="450">
+				
+			</div>
 			<div id="save-graph">
 				<a href="#" onclick="saveGraph()">Save Graph</a>
 				<p><em>Click the link above to open a window with the image.  Then, right-click and click "Save image as..." to save to your computer.</em></p>
